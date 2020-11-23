@@ -3,7 +3,9 @@
 package app.coronawarn.server.services.callback.controller;
 
 import java.net.URI;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +19,8 @@ public class RequestExecutor {
 
   private final TestRestTemplate testRestTemplate;
 
-  public RequestExecutor(TestRestTemplate testRestTemplate) {
-    this.testRestTemplate = testRestTemplate;
+  public RequestExecutor(@Qualifier("myRestTemplateBuilder") RestTemplateBuilder restTemplateBuilder) {
+    this.testRestTemplate = new TestRestTemplate(restTemplateBuilder);
   }
 
   public ResponseEntity<Void> executeGet(String batchTag, String dateString) {

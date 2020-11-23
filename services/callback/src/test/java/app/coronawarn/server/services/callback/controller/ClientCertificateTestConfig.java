@@ -10,9 +10,11 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 
+@Configuration
 public class ClientCertificateTestConfig {
 
   private static final String CLIENT_CERTIFICATE = "src/test/resources/efgs.p12";
@@ -23,7 +25,7 @@ public class ClientCertificateTestConfig {
 
   @Bean
   public RestTemplateBuilder myRestTemplateBuilder() {
-    return new RestTemplateBuilder() {
+    final RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder() {
       @Override
       public ClientHttpRequestFactory buildRequestFactory() {
         try {
@@ -42,5 +44,6 @@ public class ClientCertificateTestConfig {
         }
       }
     };
+    return restTemplateBuilder.rootUri("https://localhost:7777").detectRequestFactory(true);
   }
 }

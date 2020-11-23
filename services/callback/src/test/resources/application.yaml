@@ -2,8 +2,8 @@
 logging:
   level:
     org:
-      springframework: off
-    root: off
+      springframework: info
+    root: info
 spring:
   main:
     banner-mode: off
@@ -41,7 +41,7 @@ feign:
       default:
         connect-timeout: 500
         read-timeout: 500
-        
+
 server:
   ssl:
     key-password: 123456
@@ -49,3 +49,4 @@ server:
     key-store-password: 123456
     trust-store: src/test/resources/truststore.jks
     trust-store-password: 123456
+  port: 7777

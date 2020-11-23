@@ -10,6 +10,7 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
@@ -19,9 +20,9 @@ import app.coronawarn.server.common.persistence.domain.FederationBatchStatus;
 import app.coronawarn.server.common.persistence.service.FederationBatchInfoService;
 import app.coronawarn.server.services.callback.ServerApplication;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, //
-    classes = { ServerApplication.class, ClientCertificateTestConfig.class })
-@ActiveProfiles({ "disable-ssl-client-verification-verify-hostname" })
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT,
+    classes = {ServerApplication.class, ClientCertificateTestConfig.class})
+@ActiveProfiles({"disable-ssl-client-verification-verify-hostname"})
 @DirtiesContext
 class CallbackControllerWithCertificatesTest {
 
